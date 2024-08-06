@@ -1,0 +1,29 @@
+.contenueBotton{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var( --opacity-color);
+    color: var(--text-color);
+}
+
+
+.logoBotton{
+    width: 30%;
+}
+
+.IMAGELogo{
+    width: 50%;
+}
+
+
+
+.emailKex{
+    align-items: center;
+    display: flex;
+}
+
+.num{
+    align-items: center;
+    display: flex;
+}

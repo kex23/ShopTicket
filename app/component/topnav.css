@@ -1,0 +1,95 @@
+.cadrenav{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--primary-color);
+    position: fixed;
+}
+
+.logo{
+    display: flex;
+    flex-wrap: wrap;
+    width: 33%;
+    justify-content: center;
+}
+
+.logoImage{
+    width: 18%;
+}
+
+.titrelogo{
+    font-size: 25px;
+    color: var(--text-color);
+}
+
+.withOuverture1{
+    display: flex;
+    justify-content: start;  
+   transition: width 0.8s ease;
+}
+
+.Ouverture2{
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: start;
+ 
+}
+
+.liste{
+    width: 33%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ulListe{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    width: 80%;
+
+}
+
+.liListe{
+    align-items: center;
+    display: flex;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.liListe:hover{
+    color: var(--secondary-color);
+}
+
+.recherche{
+    align-items: center;
+    display: flex;
+    justify-content: end;
+    width: 33%;
+}
+
+.inputrecherche{
+    height: 2.7vh;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border: none;
+}
+
+.button{
+    background-color: var(--secondary-color);
+    border: none;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: var(--text-color);
+    cursor: pointer;
+    margin: 0;
+}
+
+.incherche{
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}

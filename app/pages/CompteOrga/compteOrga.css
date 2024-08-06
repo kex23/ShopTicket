@@ -1,0 +1,184 @@
+.contenuCompteOrga{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.forme{
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+    background-color: rgba(71, 71, 71, 0.1); /* Utiliser une couleur de fond semi-transparente */
+    backdrop-filter: blur(10px); /* Applique le flou */
+    padding: 20px; /* Ajout de padding pour un meilleur espacement */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optionnel : ajoute une ombre pour un meilleur contraste */
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border-radius: 15px;
+    z-index: 9999; 
+    margin-top: 3%;
+}
+
+.titrepublier{
+    width: 100%;
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 28px;
+    font-family: cursive;
+}
+
+.titreevent{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center; 
+    margin-top: 3%;
+}
+
+.InputLocation{
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.InputPromotion{
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.dateEnvent{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.EventType{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.EventLocation{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.EventPromotion{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.InputEventType {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.Time{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.submittedData{
+    width: 50%;
+    border: 1px solid var(--background-color);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.submittedImage{
+    width: 100%;
+}
+
+.affichePhare{
+    width: 100%;
+    display: flex;
+    align-items: start;
+}
+
+.EventImage{
+    width: 50%;
+}
+
+.infoOrga{
+    display: flex;
+    width: 100%;
+    margin-top: 2%;
+}
+
+.event{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    border: 1px solid var(--background-color);
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    margin-top: 2%;
+}
+
+.DivImage{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.imageEvenement{
+    width: 50%;
+}
+
+.titreEvenement{
+    width: 100%;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 25px;
+    color: var(--secondary-color);
+}
+
+.DateEvenement{
+    width: 100%;
+    margin: 0;
+}
+
+.HeureEvenement{
+    width: 100%;
+    margin: 0;
+}
+
+.LieuEvenement{
+    width: 100%;
+    margin: 0;
+}
+
+.TyoeEvenement{
+    width: 100%;
+    margin: 0;
+}

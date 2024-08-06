@@ -1,0 +1,42 @@
+.contenuePage {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Centrer les éléments horizontalement */
+    min-height: 100vh; /* Assurez-vous que la page occupe toute la hauteur de la fenêtre */
+}
+
+.left {
+    margin-top: 4%; /* Ajustez cette valeur pour correspondre à la hauteur de Topnav */
+    width: 100%; /* Assurez-vous que la section prend toute la largeur disponible */
+    display: flex; /* Centrer le contenu de .left horizontalement */
+    position: fixed;
+}
+
+.leftNavContent {
+    width: 100%; /* Ajustez selon les besoins */
+    max-width: 1200px; /* Limiter la largeur maximale pour un meilleur affichage */
+    padding: 0 20px; /* Ajouter du padding pour l'espacement interne */
+}
+
+
+.afficheEVEnement{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.conte{
+    width: 100%;
+    margin-top: 5%;
+}
+
+.reactions{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
