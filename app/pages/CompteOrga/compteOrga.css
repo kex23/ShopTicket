@@ -23,6 +23,22 @@
     z-index: 9999;
 }
 
+.deleteButton {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .deleteButton:hover {
+    color: darkred;
+  }
+  
+
 .titrepublier {
     width: 100%;
     text-align: center;

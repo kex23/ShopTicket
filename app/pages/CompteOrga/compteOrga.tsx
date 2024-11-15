@@ -52,6 +52,17 @@ export default function CompteOrga() {
     setEventImage(e.target.files[0]);
   };
 
+  const handleDeleteEvent = async (eventId) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/api/events/${eventId}`);
+      setEvents(events.filter((event) => event.id !== eventId));  // Remove event from state
+    } catch (error) {
+      console.error('Failed to delete event:', error.response ? error.response.data : error.message);
+      setError('Failed to delete event.');
+    }
+  };
+  
+  
   
 
   const handleSubmit = async (e) => {
@@ -213,29 +224,27 @@ export default function CompteOrga() {
           </form>
         )}
 
-        {Array.isArray(events) ? (
-          [...events].reverse().map((event, index) => {
-            // Debugging output
-            console.log('Event:', event);
+          {Array.isArray(events) ? (
+            [...events].reverse().map((event, index) => {
+              const eventDate = new Date(event.date);
+              const eventTime = new Date(`${event.date}T${event.time}`);
+              const formattedTime = isNaN(eventTime.getTime()) ? 'Invalid Time' : eventTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-            // Ensure event.date and event.time are valid
-            const eventDate = new Date(event.date);
-            const eventTime = new Date(`${event.date}T${event.time}`);
-            const formattedTime = isNaN(eventTime.getTime()) ? 'Invalid Time' : eventTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-            return (
-              <div key={index} className="event">
-                <div className="infoOrga">
-                  <img className="profileImage" src="./user.jpg" alt="Profile" />
-                  <p className="UserOrganisateur">KexEvent</p>
-                </div>
-                <h3 className='titreEvenement'>{event.title}</h3>
-                <p className='DateEvenement'>Date: {new Date(event.date).toLocaleDateString()}</p>
-                <p className='HeureEvenement'>Heure: {formattedTime}</p>
-                <p className='TypeEvenement'>Type: {event.type}</p>
-                <p className='LieuEvenement'>Lieu: {event.location || 'Non spécifié'}</p>
-                <p className="PromotionEvenement">
-                    {/* Respect the line breaks in the event's promotion text */}
+              return (
+                <div key={index} className="event">
+                  <div className="infoOrga">
+                    <img className="profileImage" src="./user.jpg" alt="Profile" />
+                    <p className="UserOrganisateur">KexEvent</p>
+                  </div>
+                  <button className="deleteButton" onClick={() => handleDeleteEvent(event.id)}>
+                    X
+                  </button>
+                  <h3 className="titreEvenement">{event.title}</h3>
+                  <p className="DateEvenement">Date: {eventDate.toLocaleDateString()}</p>
+                  <p className="HeureEvenement">Heure: {formattedTime}</p>
+                  <p className="TypeEvenement">Type: {event.type}</p>
+                  <p className="LieuEvenement">Lieu: {event.location || 'Non spécifié'}</p>
+                  <p className="PromotionEvenement">
                     {event.promotion.split('\n').map((line, idx) => (
                       <span key={idx}>
                         {line}
@@ -243,19 +252,21 @@ export default function CompteOrga() {
                       </span>
                     ))}
                   </p>
-                <div className="DivImage">
-                  {event.image && <img className='imageEvenement' src={`http://localhost:3000/uploads/${event.image}`} alt={event.title} />}
-                </div>              
-                <div className="reactions">
-                  <HeartIcon className="heartIcon" />
-                  <ShopIcon className="shoppingIcon" />
+                  <div className="DivImage">
+                    {event.image && <img className="imageEvenement" src={`http://localhost:3000/uploads/${event.image}`} alt={event.title} />}
+                  </div>
+                  <div className="reactions">
+                    <HeartIcon className="heartIcon" />
+                    <ShopIcon className="shoppingIcon" />
+                  </div>
+                  
                 </div>
-              </div>
-            );
-          })
-        ) : (
-          <p>No events found.</p>
-        )}
+              );
+            })
+          ) : (
+            <p>No events found.</p>
+          )}
+
 
       </div>
     </div>
