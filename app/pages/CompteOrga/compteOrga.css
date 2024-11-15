@@ -1,31 +1,29 @@
-.contenuCompteOrga{
+.contenuCompteOrga {
     margin-top: 5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
-.forme{
+.forme {
     border: 1px solid var(--primary-color);
     border-radius: 15px;
-    background-color: rgba(71, 71, 71, 0.1); /* Utiliser une couleur de fond semi-transparente */
-    backdrop-filter: blur(10px); /* Applique le flou */
-    padding: 20px; /* Ajout de padding pour un meilleur espacement */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optionnel : ajoute une ombre pour un meilleur contraste */
+    background-color: rgba(71, 71, 71, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     width: 50%;
-    border-radius: 15px;
-    z-index: 9999; 
     margin-top: 3%;
+    z-index: 9999;
 }
 
-.titrepublier{
+.titrepublier {
     width: 100%;
     text-align: center;
     color: var(--secondary-color);
@@ -33,31 +31,7 @@
     font-family: cursive;
 }
 
-.titreevent{
-    width: 100%;
-    align-items: center;
-    display: flex;
-    justify-content: center; 
-    margin-top: 3%;
-}
-
-.InputLocation{
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.InputPromotion{
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.dateEnvent{
+.titreevent, .dateEnvent, .EventType, .EventLocation, .EventPromotion, .Time {
     width: 100%;
     align-items: center;
     display: flex;
@@ -65,28 +39,7 @@
     margin-top: 3%;
 }
 
-.EventType{
-    width: 100%;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.EventLocation{
-    width: 100%;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.EventPromotion{
-    width: 100%;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.InputEventType {
+.InputLocation, .InputPromotion, .InputEventType {
     width: 100%;
     padding: 8px;
     margin: 8px 0;
@@ -94,15 +47,7 @@
     border: 1px solid #ccc;
 }
 
-.Time{
-    width: 100%;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-top: 3%;
-}
-
-.submittedData{
+.submittedData {
     width: 50%;
     border: 1px solid var(--background-color);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
@@ -110,30 +55,30 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
 }
 
-.submittedImage{
+.submittedImage {
     width: 100%;
-}
-
-.affichePhare{
-    width: 100%;
-    display: flex;
-    align-items: start;
-}
-
-.EventImage{
-    width: 50%;
 }
 
 .infoOrga{
+    justify-content: start;
     display: flex;
-    width: 100%;
-    margin-top: 2%;
+    align-items: center;
 }
 
-.event{
+.affichePhare, .EventImage, .DivImage {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imageEvenement{
+    width: 50%;
+}
+
+.event {
     width: 50%;
     display: flex;
     flex-wrap: wrap;
@@ -144,18 +89,7 @@
     margin-top: 2%;
 }
 
-.DivImage{
-    width: 100%;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.imageEvenement{
-    width: 50%;
-}
-
-.titreEvenement{
+.titreEvenement {
     width: 100%;
     font-family: cursive;
     font-weight: bold;
@@ -163,22 +97,59 @@
     color: var(--secondary-color);
 }
 
-.DateEvenement{
+.DateEvenement, .HeureEvenement, .LieuEvenement, .TyoeEvenement {
     width: 100%;
     margin: 0;
 }
 
-.HeureEvenement{
-    width: 100%;
-    margin: 0;
+
+.reactions{
+    justify-content: space-around;
 }
 
-.LieuEvenement{
-    width: 100%;
-    margin: 0;
+/* Media Queries */
+
+/* Petits écrans (moins de 600px) */
+@media (max-width: 599px) {
+    .forme, .submittedData, .event {
+        width: 90%; /* Prend presque toute la largeur */
+    }
+
+    .titrepublier {
+        font-size: 24px; /* Réduit la taille du texte */
+    }
+
+    .titreEvenement {
+        font-size: 20px; /* Réduit la taille du titre */
+    }
+
+    .InputLocation, .InputPromotion, .InputEventType {
+        padding: 6px; /* Réduit l'espacement */
+    }
 }
 
-.TyoeEvenement{
-    width: 100%;
-    margin: 0;
+/* Écrans moyens (600px - 1024px) */
+@media (min-width: 600px) and (max-width: 1024px) {
+    .forme, .submittedData, .event {
+        width: 70%; /* Prend une grande partie de l'espace */
+    }
+
+    .titrepublier {
+        font-size: 26px; /* Ajuste la taille du texte */
+    }
+
+    .titreEvenement {
+        font-size: 22px; /* Ajuste la taille du titre */
+    }
+}
+
+/* Grands écrans (plus de 1024px) */
+@media (min-width: 1024px) {
+    .forme, .submittedData, .event {
+        width: 50%; /* Garde une largeur optimale sur grands écrans */
+    }
+
+    .InputLocation, .InputPromotion, .InputEventType {
+        padding: 10px; /* Plus d'espacement pour les grands écrans */
+    }
 }

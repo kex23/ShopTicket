@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -17,12 +17,13 @@ model Event {
   id          Int      @id @default(autoincrement())
   title       String
   date        DateTime
-  time        DateTime
+  time        DateTime   
   type        String
   location    String?  // Optional field for location
   promotion   String?  // Optional field for promotional phrase
   image       String?
 }
+
 
 
 

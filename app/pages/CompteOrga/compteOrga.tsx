@@ -52,6 +52,8 @@ export default function CompteOrga() {
     setEventImage(e.target.files[0]);
   };
 
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -60,10 +62,23 @@ export default function CompteOrga() {
       return;
     }
 
+    // Ensure the time is in a valid format
+    const timeParts = eventTime.split(':');
+    if (timeParts.length !== 2) {
+      setError('Invalid time format.');
+      return;
+    }
+
+    const [hour, minute] = timeParts;
+    if (isNaN(hour) || isNaN(minute)) {
+      setError('Invalid time format.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('title', eventTitle);
     formData.append('date', eventDate);
-    formData.append('time', eventTime);
+    formData.append('time', eventTime);  // Ensure eventTime is in correct format
     formData.append('type', eventType);
     formData.append('location', eventLocation);
     if (eventPromotion) {
@@ -99,7 +114,8 @@ export default function CompteOrga() {
       console.error('Failed to create event:', error.response ? error.response.data : error.message);
       setError('Failed to create event.');
     }
-  };
+};
+
 
   return (
     <div className='contenue'>
@@ -156,6 +172,7 @@ export default function CompteOrga() {
                 <option value="évangélique">Évangélique</option>
                 <option value="sportif">Sportif</option>
                 <option value="concert">Concert</option>
+                <option value="cabaret">Cabaret</option>
               </select>
             </div>
             <div className="EventLocation">
@@ -168,12 +185,18 @@ export default function CompteOrga() {
               />
             </div>
             <div className="EventPromotion">
-              <textarea
+            <textarea
                 placeholder="Phrase pour inciter les gens à acheter (optionnel)"
                 value={eventPromotion}
                 onChange={(e) => setEventPromotion(e.target.value)}
                 className="InputPromotion"
               />
+              <div className="DisplayPromotion">
+                {/* Transform the text to include line breaks */}
+                {eventPromotion.split('\n').map((line, index) => (
+                  <p key={index}>{line}</p>
+                ))}
+            </div>
             </div>
             <div className="ImageUpload">
               <FontAwesomeIcon icon={faImage} />
@@ -208,10 +231,18 @@ export default function CompteOrga() {
                 </div>
                 <h3 className='titreEvenement'>{event.title}</h3>
                 <p className='DateEvenement'>Date: {new Date(event.date).toLocaleDateString()}</p>
-                <p className='HeureEvenement'>Heure: {event.time}</p>
+                <p className='HeureEvenement'>Heure: {formattedTime}</p>
                 <p className='TypeEvenement'>Type: {event.type}</p>
                 <p className='LieuEvenement'>Lieu: {event.location || 'Non spécifié'}</p>
-                <p className='PromotionEvenement'>{event.promotion }</p>
+                <p className="PromotionEvenement">
+                    {/* Respect the line breaks in the event's promotion text */}
+                    {event.promotion.split('\n').map((line, idx) => (
+                      <span key={idx}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
+                  </p>
                 <div className="DivImage">
                   {event.image && <img className='imageEvenement' src={`http://localhost:3000/uploads/${event.image}`} alt={event.title} />}
                 </div>              

@@ -1,5 +1,3 @@
-// pages/api/events.js
-
 import { PrismaClient } from '@prisma/client';
 import formidable from 'formidable';
 import path from 'path';
@@ -13,6 +11,7 @@ export const config = {
 
 const prisma = new PrismaClient();
 
+// Helper function to format date as dd/mm/yyyy
 function formatDate(dateString) {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, '0');
@@ -21,6 +20,7 @@ function formatDate(dateString) {
   return `${day}/${month}/${year}`;
 }
 
+// Helper function to format time as hh:mm
 function formatTime(dateString) {
   const date = new Date(dateString);
   const hours = String(date.getHours()).padStart(2, '0');
@@ -30,13 +30,16 @@ function formatTime(dateString) {
 
 async function handleGet(req, res) {
   try {
+    // Fetch events from database
     const events = await prisma.event.findMany();
-    // Format the date and time
+
+    // Keep the date and time format as it is from the database
     const formattedEvents = events.map(event => ({
       ...event,
-      date: formatDate(event.date),
-      time: formatTime(event.time)
+      date: event.date,  // Keep the original date format
+      time: formatTime(event.time),  // Keep the original time format
     }));
+
     console.log('GET Response:', formattedEvents);
     res.status(200).json(formattedEvents);
   } catch (error) {
@@ -44,6 +47,7 @@ async function handleGet(req, res) {
     res.status(500).json({ error: 'Error fetching events' });
   }
 }
+
 
 async function handlePost(req, res) {
   console.log('Handling POST request');
@@ -61,17 +65,26 @@ async function handlePost(req, res) {
     console.log('Form fields:', fields);
     console.log('Files:', files);
 
+    // Extraire les champs du formulaire
     const { title, date, time, type, location, promotion } = fields;
     const image = files.image ? files.image[0].newFilename : null;
 
+    // Convertir les valeurs de date et heure
     const titleValue = Array.isArray(title) ? title[0] : title;
     const dateValue = Array.isArray(date) ? new Date(date[0]) : new Date(date);
     const timeValue = Array.isArray(time) ? time[0] : time;
 
-    // Combine date and time into a single DateTime string
-    const dateTimeString = `${dateValue.toISOString().split('T')[0]}T${timeValue || '00:00'}:00Z`;
-    const dateTimeValue = new Date(dateTimeString);
+    // Combine date and time into a full DateTime object
+    const [hour, minute] = timeValue.split(':');  // Extraire les heures et minutes
+    if (isNaN(hour) || isNaN(minute)) {
+      return res.status(400).json({ error: 'Invalid time format.' });
+    }
 
+    const timeFormatted = new Date(dateValue);
+    timeFormatted.setHours(hour);
+    timeFormatted.setMinutes(minute);
+
+    // Récupérer les autres valeurs
     const typeValue = Array.isArray(type) ? type[0] : type;
     const locationValue = Array.isArray(location) ? location[0] : location;
     const promotionValue = Array.isArray(promotion) ? promotion[0] : promotion;
@@ -79,31 +92,27 @@ async function handlePost(req, res) {
     console.log('Parsed values:', {
       title: titleValue,
       date: dateValue,
-      time: dateTimeValue,
+      time: timeFormatted,
       type: typeValue,
       location: locationValue,
       promotion: promotionValue,
       image: image,
     });
 
-    // Verify the upload directory exists
-    const uploadDir = path.join(process.cwd(), 'public/uploads');
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-
+    // Créer l'événement dans la base de données
     try {
       const event = await prisma.event.create({
         data: {
           title: titleValue,
-          date: dateValue,
-          time: dateTimeValue,
+          date: dateValue,  // Stocker la date comme un objet Date
+          time: timeFormatted,  // Stocker l'heure comme DateTime
           type: typeValue,
-          location: locationValue || null, // Handle optional field
-          promotion: promotionValue || null, // Handle optional field
+          location: locationValue || null,
+          promotion: promotionValue || null,
           image,
         },
       });
+
       console.log('POST Response:', event);
       res.status(201).json(event);
     } catch (error) {
@@ -112,6 +121,11 @@ async function handlePost(req, res) {
     }
   });
 }
+
+
+
+
+
 
 export default async function handler(req, res) {
   switch (req.method) {

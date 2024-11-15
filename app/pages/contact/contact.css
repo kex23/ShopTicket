@@ -51,3 +51,14 @@
 .bas{
     margin-top: 3%;
 }
+
+@media (max-width: 599px) {
+    .second{
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .Text{
+        width: 100%;
+    }
+}
